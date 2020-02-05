@@ -8,11 +8,14 @@
 
 from cache_fx import ret_token
 from cache_fx import query_elast
+from cache_fx import auth_chk
 
 save_nm = 'output.csv'
 
-username = ''
-password = ''
+config = auth_chk()
+
+username = config['username']
+password = config['password']
 endpoint = 'https://www.agstrata.net/'
 
 dataSource = 'DailyFYData'

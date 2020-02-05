@@ -7,10 +7,13 @@
 
 from cache_fx import ret_token
 from cache_fx import build_elast
+from cache_fx import auth_chk
 
-username = ''
-password = ''
-ecube = ''
+config = auth_chk()
+
+username = config['username']
+password = config['password']
+ecube = 'Crush_2'
 endpoint = 'https://www.agstrata.net/'
 
 token = ret_token(username,password,endPoint=endpoint)

@@ -3,8 +3,22 @@
 import requests
 import urllib.parse as parse
 import pandas as pd
+import numpy as np
+import os.path
 import math
 from io import StringIO
+import sys
+import pickle
+
+def auth_chk():
+    creds = 0
+    if os.path.isfile('config.pkl'):
+        print('Config info exists')
+        creds = pickle.load(open('config.pkl','rb'))
+    else:
+        print('NO CONFIG INFO PRESENT!')
+        sys.exit()
+    return creds
 
 def ret_token(uname,pword,endPoint='https://www.agstrata.net/'):
     ## Non-parsed username and password

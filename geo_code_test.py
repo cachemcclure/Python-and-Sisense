@@ -7,9 +7,12 @@
 
 from cache_fx import ret_token
 from cache_fx import get_dist
+from cache_fx import auth_chk
 
-username = ''
-password = ''
+config = auth_chk()
+
+username = config['username']
+password = config['password']
 endpoint = 'https://www.agstrata.net/'
 
 place = '3201 Mockingbird Ln'
