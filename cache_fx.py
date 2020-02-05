@@ -147,5 +147,5 @@ def haversine_dist(latlon1, latlon2, r=3958.8):
 def get_dist(token, city1, state1, city2, state2, country="United States",endPoint='https://www.agstrata.net/',level="city"):
     latlon1 = geo_code(token, city1, state1)
     latlon2 = geo_code(token, city2, state2)
-    dist = haversine_dist(latlon1, latlon2)
+    dist = int(haversine_dist(latlon1, latlon2))
     return dist
