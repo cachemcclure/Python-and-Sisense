@@ -15,7 +15,6 @@ username = config['username']
 password = config['password']
 endpoint = config['endpoint']
 
-place = '3201 Mockingbird Ln'
 city = 'Amarillo'
 state = 'Texas'
 
