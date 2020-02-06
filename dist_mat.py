@@ -50,8 +50,8 @@ for xx in range(aa):
               ' to '+auct_data['city'][yy]+', '+auct_data['state'][yy]+' is '+
               str(temp)+' miles.')
     try:
-        dist_mat = np.vstack((dist_mat,temp_line))
+        dist_mat = np.vstack((dist_mat,temp_line[np.newaxis].T))
     except NameError:
-        dist_mat = temp_line
+        dist_mat = temp_line[np.newaxis].T
 
 print('Finished')
