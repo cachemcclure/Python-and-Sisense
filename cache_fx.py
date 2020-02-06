@@ -9,12 +9,23 @@ import math
 from io import StringIO
 import sys
 import pickle
+import sqlalchemy as db
 
 def auth_chk():
     creds = 0
     if os.path.isfile('config.pkl'):
         print('Config info exists')
         creds = pickle.load(open('config.pkl','rb'))
+    else:
+        print('NO CONFIG INFO PRESENT!')
+        sys.exit()
+    return creds
+
+def sql_auth_chk():
+    creds = 0
+    if os.path.isfile('sql_config.pkl'):
+        print('Config info exists')
+        creds = pickle.load(open('sql_config.pkl','rb'))
     else:
         print('NO CONFIG INFO PRESENT!')
         sys.exit()
@@ -149,3 +160,26 @@ def get_dist(token, city1, state1, city2, state2, country="United States",endPoi
     latlon2 = geo_code(token, city2, state2)
     dist = int(haversine_dist(latlon1, latlon2))
     return dist
+
+def conn_db(uname,pword,table,address='172.16.15.3',database='astrata1'):
+    conn_str = ('mssql+pymssql://' + uname + ':' + pword + '@' + address +
+                '\\' + database + '/' + table)
+    engine = db.create_engine(conn_str)
+    return engine
+
+def query_db(query,engine):
+    try:
+        cnxn = engine.connect()
+        print('Database connected')
+    except:
+        print('Database could not be connected')
+        sys.exit()
+    output_data = pd.read_sql_query(query,cnxn)
+    return output_data
+
+def sql_query(query,uname,pword,table,address='172.16.15.3',database='astrata1'):
+    engine = conn_db(uname,pword,table,address,database)
+    print('Engine created')
+    data = query_db(query,engine)
+    print('Query executed')
+    return data
