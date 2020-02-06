@@ -14,7 +14,7 @@ config = auth_chk()
 username = config['username']
 password = config['password']
 ecube = 'Crush_2'
-endpoint = 'https://www.agstrata.net/'
+endpoint = config['endpoint']
 
 token = ret_token(username,password,endPoint=endpoint)
 output = build_elast(token,ecube,endPoint=endpoint)

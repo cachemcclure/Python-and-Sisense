@@ -16,7 +16,7 @@ config = auth_chk()
 
 username = config['username']
 password = config['password']
-endpoint = 'https://www.agstrata.net/'
+endpoint = config['endpoint']
 
 dataSource = 'DailyFYData'
 

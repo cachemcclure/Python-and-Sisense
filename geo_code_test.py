@@ -13,7 +13,7 @@ config = auth_chk()
 
 username = config['username']
 password = config['password']
-endpoint = 'https://www.agstrata.net/'
+endpoint = config['endpoint']
 
 place = '3201 Mockingbird Ln'
 city = 'Amarillo'
