@@ -13,8 +13,8 @@ config = auth_chk()
 
 username = config['username']
 password = config['password']
-ecube = 'Crush_2'
 endpoint = config['endpoint']
+ecube = 'Crush_2'
 
 token = ret_token(username,password,endPoint=endpoint)
 output = build_elast(token,ecube,endPoint=endpoint)
