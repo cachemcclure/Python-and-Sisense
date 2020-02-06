@@ -24,10 +24,10 @@ def auth_chk():
 def sql_auth_chk():
     creds = 0
     if os.path.isfile('sql_config.pkl'):
-        print('Config info exists')
+        print('SQL config info exists')
         creds = pickle.load(open('sql_config.pkl','rb'))
     else:
-        print('NO CONFIG INFO PRESENT!')
+        print('NO SQL CONFIG INFO PRESENT!')
         sys.exit()
     return creds
 
