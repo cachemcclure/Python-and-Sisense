@@ -31,4 +31,10 @@ token = ret_token(username,password,endPoint=endpoint)
 
 data = query_elast(dataSource,query,token,endPoint=endpoint)
 
-data.to_csv(save_nm)
+##data.to_csv(save_nm)
+
+form_data = data.groupby(['FeedyardName','Sex']).sum().reset_index()
+
+form_data['Deaths'] = form_data['HeadPlaced']-(form_data['TotalHeadShipped']
+                                              +form_data['CurrentHeadCount'])
+form_data['Death_Loss'] = form_data['Deaths']/form_data['HeadPlaced']
