@@ -8,11 +8,11 @@
 
 from cache_fx import ret_token
 from cache_fx import query_elast
-from cache_fx import auth_chk
+from cache_fx import sis_auth_chk
 
 save_nm = 'output.csv'
 
-config = auth_chk()
+config = sis_auth_chk()
 
 username = config['username']
 password = config['password']

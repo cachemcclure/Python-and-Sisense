@@ -7,9 +7,9 @@
 
 from cache_fx import ret_token
 from cache_fx import build_elast
-from cache_fx import auth_chk
+from cache_fx import sis_auth_chk
 
-config = auth_chk()
+config = sis_auth_chk()
 
 username = config['username']
 password = config['password']

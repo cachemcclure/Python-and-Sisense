@@ -3,14 +3,14 @@
 ## Builds haversine distance matrix between all unique pairs of feedyard/
 ## auction.
 
-from cache_fx import auth_chk
+from cache_fx import sis_auth_chk
 from cache_fx import sql_auth_chk
 from cache_fx import ret_token
 from cache_fx import get_dist
 from cache_fx import sql_query
 import numpy as np
 
-config = auth_chk()
+config = sis_auth_chk()
 
 username = config['username']
 password = config['password']

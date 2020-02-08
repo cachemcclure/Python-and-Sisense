@@ -11,11 +11,11 @@ import sys
 import pickle
 import sqlalchemy as db
 
-def auth_chk():
+def sis_auth_chk():
     creds = 0
-    if os.path.isfile('config.pkl'):
+    if os.path.isfile('sis_config.pkl'):
         print('Config info exists')
-        creds = pickle.load(open('config.pkl','rb'))
+        creds = pickle.load(open('sis_config.pkl','rb'))
     else:
         print('NO CONFIG INFO PRESENT!')
         sys.exit()
@@ -30,6 +30,20 @@ def sql_auth_chk():
         print('NO SQL CONFIG INFO PRESENT!')
         sys.exit()
     return creds
+
+def build_sis_config(username,password,endpoint='https://www.agstrata.net/'):
+    temp = {'username':username,'password':password,'endpoint':endpoint}
+    ret_token(uname=username,pword=password,endPoint=endpoint)
+    pickle.dump(temp,open('sis_config.pkl','wb'))
+    print('Sisense config file successfully built')
+    return
+
+def build_sql_config(username,password,address='172.16.15.3',database='astrata1'):
+    temp = {'username':username,'password':password,'address':address,
+            'database':database}
+    pickle.dump(temp,open('sql_config.pkl','wb'))
+    print('SQL config file successfully built')
+    return
 
 def ret_token(uname,pword,endPoint='https://www.agstrata.net/'):
     ## Non-parsed username and password
@@ -56,6 +70,7 @@ def ret_token(uname,pword,endPoint='https://www.agstrata.net/'):
     else:
         token = " "
         print('Invalid login credentials. Please check.')
+        sys.exit()
     return token
 
 def query_elast(dataSource,query,token,endPoint='https://www.agstrata.net/'):
