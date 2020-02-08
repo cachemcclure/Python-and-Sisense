@@ -14,6 +14,7 @@ import sys
 import os
 
 def zero():
+    os.system('cls')
     print('help statement here')
     print(' ')
     input('Press enter to return to the main menu')
@@ -21,6 +22,7 @@ def zero():
     return main()
 
 def one():
+    os.system('cls')
     uname = input('Sisense username: ')
     pword = input('Sisense password: ')
     print('Enter 0 to use the default Sisense address')
@@ -35,6 +37,7 @@ def one():
     return main()
 
 def two():
+    os.system('cls')
     uname = input('SQL username: ')
     pword = input('SQL password: ')
     print('Enter 0 to use the default SQL address')
@@ -55,6 +58,7 @@ def two():
     return main()
 
 def three():
+    os.system('cls')
     config = sis_auth_chk()
     token = ret_token(config['username'],config['password'],endPoint=config['endpoint'])
     print(token)
@@ -64,6 +68,7 @@ def three():
     return main()
 
 def four():
+    os.system('cls')
     config = token_chk()
     token = config['token']
     config2 = sis_auth_chk()
@@ -79,6 +84,7 @@ def four():
     return main()
 
 def five():
+    os.system('cls')
     config = token_chk()
     token = config['token']
     config2 = sis_auth_chk()
@@ -92,6 +98,7 @@ def five():
     return main()
 
 def six():
+    os.system('cls')
     config = token_chk()
     token = config['token']
     config2 = sis_auth_chk()
@@ -107,6 +114,7 @@ def six():
     return main()
 
 def seven():
+    os.system('cls')
     config = sql_auth_chk()
     username = config['username']
     password = config['password']
@@ -123,6 +131,7 @@ def seven():
     return main()
 
 def eight():
+    os.system('cls')
     config = token_chk()
     token = config['token']
     config2 = sis_auth_chk()
