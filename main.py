@@ -8,6 +8,7 @@ from cache_fx import query_elast
 from cache_fx import geo_code
 from cache_fx import get_dist
 from cache_fx import sql_query
+from cache_fx import build_elast
 import pandas as pd
 import sys
 
@@ -117,6 +118,18 @@ def seven():
     print(' ')
     return main()
 
+def eight():
+    config = token_chk()
+    token = config['token']
+    config2 = sis_auth_chk()
+    endpoint = config2['endpoint']
+    ecube = input('Elasticube: ')
+    build_elast(token,ecube,endPoint=endpoint)
+    print(' ')
+    input('Press enter to return to the main menu')
+    print(' ')
+    return main()
+
 def switch_fx(argument):
     switcher = {
         1: one,
@@ -126,6 +139,7 @@ def switch_fx(argument):
         5: five,
         6: six,
         7: seven,
+        8: eight,
         9: sys.exit
         }
     func = switcher.get(argument, lambda: "Invalid entry")
@@ -143,6 +157,7 @@ def main():
     print('5 - Geo-code a location')
     print('6 - Find distance between two locations')
     print('7 - Query SQL database')
+    print('8 - Build Elasticube')
     print('9 - Exit')
 
     var = input('Choose Option: ')
