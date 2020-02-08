@@ -122,11 +122,10 @@ def build_elast(token,ecube,endPoint='https://www.agstrata.net/'):
     header = {'Authorization' : 'Bearer '+token}
     print('Building Elasticube {}'.format(ecube))
     response = requests.post(endPoint, headers=header)
-    data = response.text
-
-    df = pd.read_csv(StringIO(data))
+##    data = response.text
+##    df = pd.read_csv(StringIO(data))
     print('Data retrieved')
-    return df
+    return
 
 def geo_code(token,city,state,country='United States',place="",endPoint='https://www.agstrata.net/',level="city"):
     print('Geo-coding location:')
