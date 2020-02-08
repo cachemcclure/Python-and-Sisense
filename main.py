@@ -124,7 +124,8 @@ def eight():
     config2 = sis_auth_chk()
     endpoint = config2['endpoint']
     ecube = input('Elasticube: ')
-    build_elast(token,ecube,endPoint=endpoint)
+    out = build_elast(token,ecube,endPoint=endpoint)
+    print('Elasticube building')
     print(' ')
     input('Press enter to return to the main menu')
     print(' ')
