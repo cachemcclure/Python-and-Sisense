@@ -11,6 +11,7 @@ from cache_fx import sql_query
 from cache_fx import build_elast
 import pandas as pd
 import sys
+import os
 
 def zero():
     print('help statement here')
@@ -131,6 +132,11 @@ def eight():
     print(' ')
     return main()
 
+def nine():
+    os.system('cls')
+    sys.exit()
+    return
+
 def switch_fx(argument):
     switcher = {
         1: one,
@@ -141,12 +147,13 @@ def switch_fx(argument):
         6: six,
         7: seven,
         8: eight,
-        9: sys.exit
+        9: nine
         }
     func = switcher.get(argument, lambda: "Invalid entry")
     return func()
 
 def main():
+    os.system('cls')
     print("WELCOME TO THE TOP MENU")
     print(' ')
     print('MENU')
