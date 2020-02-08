@@ -10,6 +10,7 @@ from io import StringIO
 import sys
 import pickle
 import sqlalchemy as db
+from time import time
 
 def sis_auth_chk():
     creds = 0
@@ -67,11 +68,28 @@ def ret_token(uname,pword,endPoint='https://www.agstrata.net/'):
         xx = new_str.find(",")
         token = new_str[:xx-1]
         print('Retrieved authentication token from Sisense')
+        tok_time = time()
+        temp_var = {'token':token,'token_time':tok_time}
+        pickle.dump(temp_var,open('sis_token.pkl','wb'))
     else:
         token = " "
         print('Invalid login credentials. Please check.')
         sys.exit()
     return token
+
+def token_chk():
+    creds = 0
+    if os.path.isfile('sis_token.pkl'):
+        print('Sisense token info exists')
+        creds = pickle.load(open('sis_token.pkl','rb'))
+        cur_time = time()
+        if creds['token_time']+86400 < cur_time:
+            print('Please generate a new token')
+            sys.exit()
+    else:
+        print('NO SISENSE TOKEN INFO PRESENT!')
+        sys.exit()
+    return creds
 
 def query_elast(dataSource,query,token,endPoint='https://www.agstrata.net/'):
     ## Non-parsed dataSource, query, and token
