@@ -139,6 +139,7 @@ def nine():
 
 def switch_fx(argument):
     switcher = {
+        0: zero,
         1: one,
         2: two,
         3: three,
