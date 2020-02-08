@@ -15,6 +15,9 @@ import os
 
 def zero():
     print('help statement here')
+    print(' ')
+    input('Press enter to return to the main menu')
+    print(' ')
     return main()
 
 def one():
