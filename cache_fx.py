@@ -16,10 +16,11 @@ def sis_auth_chk():
     creds = 0
     if os.path.isfile('sis_config.pkl'):
         print('Config info exists')
+        token_chk()
         creds = pickle.load(open('sis_config.pkl','rb'))
     else:
         print('NO CONFIG INFO PRESENT!')
-        sys.exit()
+        creds = build_sis_config2()
     return creds
 
 def sql_auth_chk():
@@ -29,7 +30,7 @@ def sql_auth_chk():
         creds = pickle.load(open('sql_config.pkl','rb'))
     else:
         print('NO SQL CONFIG INFO PRESENT!')
-        sys.exit()
+        creds = build_sql_config2()
     return creds
 
 def build_sis_config(username,password,endpoint='https://www.agstrata.net/'):
@@ -39,12 +40,48 @@ def build_sis_config(username,password,endpoint='https://www.agstrata.net/'):
     print('Sisense config file successfully built')
     return
 
+def build_sis_config2():
+    username = input('Username: ')
+    password = input('Password: ')
+    print('To use the default endpoint, enter 0')
+    endpoint = input('Endpoint: ')
+    if endpoint == str(0):
+        endpoint = 'https://www.agstrata.net/'
+    temp = {'username':username,'password':password,'endpoint':endpoint}
+    ret_token(uname=username,pword=password,endPoint=endpoint)
+    pickle.dump(temp,open('sis_config.pkl','wb'))
+    print('Sisense config file successfully built')
+    return temp
+
 def build_sql_config(username,password,address='172.16.15.3',database='astrata1'):
     temp = {'username':username,'password':password,'address':address,
             'database':database}
     pickle.dump(temp,open('sql_config.pkl','wb'))
     print('SQL config file successfully built')
     return
+
+def build_sql_config2():
+    username = input('Username: ')
+    password = input('Password: ')
+    print('To use the default address, enter 0')
+    address = input('Address: ')
+    print('To use the default database, enter 0')
+    database = input('Database: ')
+    if address == str(0) and database == str(0):
+        temp = {'username':username,'password':password,'address':'172.16.15.3',
+                'database':'astrata1'}
+    elif address == str(0):
+        temp = {'username':username,'password':password,'address':'172.16.15.3',
+                'database':database}
+    elif database == str(0):
+        temp = {'username':username,'password':password,'address':address,
+                'database':'astrata1'}
+    else:
+        temp = {'username':username,'password':password,'address':address,
+                'database':database}
+    pickle.dump(temp,open('sql_config.pkl','wb'))
+    print('SQL config file successfully built')
+    return temp
 
 def ret_token(uname,pword,endPoint='https://www.agstrata.net/'):
     ## Non-parsed username and password
@@ -74,7 +111,7 @@ def ret_token(uname,pword,endPoint='https://www.agstrata.net/'):
     else:
         token = " "
         print('Invalid login credentials. Please check.')
-        sys.exit()
+        build_sis_config2()
     return token
 
 def token_chk():

@@ -15,7 +15,8 @@ import os
 
 def zero():
     os.system('cls')
-    print('help statement here')
+    sis_auth_chk()
+    print('Sisense credentials authenticated')
     print(' ')
     input('Press enter to return to the main menu')
     print(' ')
@@ -27,7 +28,7 @@ def one():
     pword = input('Sisense password: ')
     print('Enter 0 to use the default Sisense address')
     ep = input('Sisense root web adddress: ')
-    if ep == 0:
+    if int(ep) == 0:
         build_sis_config(uname,pword)
     else:
         build_sis_config(uname,pword,endpoint=ep)
@@ -44,11 +45,11 @@ def two():
     adre = input('SQL address: ')
     print('Enter 0 to use the default SQL database')
     dbn = input('SQL database name: ')
-    if adre == 0 and dbn == 0:
+    if int(adre) == 0 and int(dbn) == 0:
         build_sql_config(uname,pword)
-    elif adre == 0:
+    elif int(adre) == 0:
         build_sql_config(uname,pword,database=dbn)
-    elif dbn == 0:
+    elif int(dbn) == 0:
         build_sql_config(uname,pword,database=dbn)
     else:
         build_sql_config(uname,pword,address=adre,database=dbn)
@@ -170,7 +171,7 @@ def main():
     print("WELCOME TO THE TOP MENU")
     print(' ')
     print('MENU')
-    print('0 - Help')
+    print('0 - Check Sisense authorization')
     print('1 - Build Sisense Configuration file')
     print('2 - Build SQL Configuration file')
     print('3 - Retrieve Sisense token')
