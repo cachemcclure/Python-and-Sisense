@@ -110,6 +110,8 @@ def six():
     state2 = input('Second state: ')
     out = get_dist(token,city1,state1,city2,state2,endPoint=endpoint)
     print(' ')
+    print('The distance between the two locations is '+str(out)+' miles.')
+    print(' ')
     input('Press enter to return to the main menu')
     print(' ')
     return main()
