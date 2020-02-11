@@ -122,10 +122,10 @@ def token_chk():
         cur_time = time()
         if creds['token_time']+86400 < cur_time:
             print('Please generate a new token')
-            sys.exit()
+            ret_token()
     else:
         print('NO SISENSE TOKEN INFO PRESENT!')
-        sys.exit()
+        ret_token()
     return creds
 
 def query_elast(dataSource,query,token,endPoint='https://www.agstrata.net/'):
