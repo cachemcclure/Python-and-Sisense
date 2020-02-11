@@ -2,6 +2,7 @@
 from cache_fx import build_sis_config
 from cache_fx import build_sql_config
 from cache_fx import sis_auth_chk
+from cache_fx import sql_auth_chk
 from cache_fx import ret_token
 from cache_fx import token_chk
 from cache_fx import query_elast

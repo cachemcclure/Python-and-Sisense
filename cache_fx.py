@@ -242,7 +242,8 @@ def query_db(query,engine):
         print('Database connected')
     except:
         print('Database could not be connected')
-        sys.exit()
+        output_data = pd.DataFrame(['Error'])
+        return output_data
     output_data = pd.read_sql_query(query,cnxn)
     return output_data
 
