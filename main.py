@@ -10,6 +10,8 @@ from cache_fx import geo_code
 from cache_fx import get_dist
 from cache_fx import sql_query
 from cache_fx import build_elast
+from cache_fx import conn_db
+from cache_fx import build_model
 import pandas as pd
 import sys
 import os
@@ -150,6 +152,49 @@ def eight():
 
 def nine():
     os.system('cls')
+    config = sql_auth_chk()
+    username = config['username']
+    password = config['password']
+    address = config['address']
+    database = config['database']
+    table = 'cattletrack'
+    def_query = '''Select g.groupid, closeouts.feedyardid,cattletypeid,
+    [DryPounds]/([PayWeightOut]-[PayWeightIn]) as DMCONV ,[PayWeightIn]/[HeadsIn] as InWt, [DaysOnFeed]/headsin  as DOF, 
+    PayWeightOut/headsin  as Outwt, closeoutdate, (dateadd(dd,(([DaysOnFeed]/headsin)*-1),CloseoutDate)) indate,
+    month(dateadd(dd,(([DaysOnFeed]/headsin)*-1),CloseoutDate)) monthin
+    from closeouts
+    inner join RelFeedYardsGroups g on g.feedyardid = closeouts.feedyardid
+    where [DryPounds]/([PayWeightOut]-[PayWeightIn]) between 3 and 12 and PayWeightIn/headsin between 400 and 999 
+    and groupid in (5,7,9,12,13,10) and cattletypeid in (1,2,3,7)'''
+    print('Default Query: ')
+    print(' ')
+    print(def_query)
+    print(' ')
+    print('To use default query, input 0.')
+    print('To write your own query, input 1.')
+    print('***WARNING***')
+    print('Writing your own query could result in an error.')
+    uin = input('Selection: ')
+    if uin == '0':
+        query = def_query
+    elif uin == '1':
+        query = input('Query: ')
+    else:
+        print('Selection not recognized. Using default query.')
+        query = def_query
+    cnxn = conn_db(username,password,table)
+    out = sql_query(query,username,password,table,address=address,database=database)
+    out_yds = build_model(out,cnxn)
+    print(' ')
+    print('Yards Skipped:')
+    print(out_yds)
+    print(' ')
+    input('Press enter to return to the main menu')
+    print(' ')
+    return main()
+
+def ten():
+    os.system('cls')
     sys.exit()
     return
 
@@ -164,7 +209,8 @@ def switch_fx(argument):
         6: six,
         7: seven,
         8: eight,
-        9: nine
+        9: nine,
+        10: ten
         }
     func = switcher.get(argument, lambda: "Invalid entry")
     return func()
@@ -183,7 +229,8 @@ def main():
     print('6 - Find distance between two locations')
     print('7 - Query SQL database')
     print('8 - Build Elasticube')
-    print('9 - Exit')
+    print('9 - Update DOF Prediction Model')
+    print('10 - Exit')
 
     var = input('Choose Option: ')
     switch_fx(int(var))
